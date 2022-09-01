@@ -1,2 +1,1 @@
-# inedss-tb-helper-scripts
-Use RSelenium to assist with simple TB tasks in I-NEDSS
+These scripts are designed to be used by local health department case investigators in Illinois. The scripts use the R Selenium package to mimic a case investigator performing simple tasks related to TB disease and TB infection in I-NEDSS.
