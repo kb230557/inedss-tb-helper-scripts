@@ -1,0 +1,30 @@
+---
+title: "clean-tb-exceptions"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+```
+
+```{r}
+
+exceptions <-vroom::vroom(list.files(path = 'tb-exceptions', full.names = T)) %>%
+  distinct() %>%
+  #separate(Reason, sep = "-")
+  mutate(Reason = strsplit(Reason, "-")) %>%
+  unnest(Reason) %>%
+  filter(!Reason == "") %>%
+  mutate(Reason = trimws(Reason))
+
+reasons <- count(exceptions, Reason) %>% arrange(desc(n))
+
+write_csv(reasons, paste0(keyring::key_get("downloads_path"), "reasons-blocking-tb-closure.csv"))
+
+```
+
+
+
